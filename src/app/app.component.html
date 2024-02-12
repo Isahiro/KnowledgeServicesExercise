@@ -1,3 +1,37 @@
 <h1>Knowledge Services Coding Exercise</h1>
 
+<div>
+  <h4>Select a shopper</h4>
+  <div *ngFor="let member of members">
+    <input type="radio" name="member.name" (click)="selectCustomer(member)">
+    <label>{{member.name}}</label>
+  </div>
+</div>
+
+<div *ngIf="this.customer.member">
+  <div>
+    <h4> Available Products </h4>
+
+    <div *ngFor="let product of products">
+      <button (click)="addProduct(product)">{{product.name}} {{product.price}}</button>
+    </div>
+  </div>
+
+  <div>
+    <h4> Shopping Cart </h4>
+
+    <div *ngFor="let product of customer.cart; let i = index">
+      <button *ngIf="product" (click)="removeProduct(i)">{{product.name}} {{product.price}}</button>
+    </div>
+
+    <div>
+      Member Discount: {{showDiscount()}}%
+    </div>
+
+    <div>
+      Subtotal: {{subtotal()}}
+    </div>
+  </div>
+</div>
+
 <router-outlet />
